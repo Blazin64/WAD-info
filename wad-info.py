@@ -44,14 +44,14 @@ def read_header(file):
 
 
 def print_header(header):
-    print(("\nHeader size:        {} bytes\n"
-           "WAD type:        0x{}\n"
-           "Cert chain size:    {} bytes\n"
-           "Reserved:        0x{}\n"
-           "Ticket size:        {} bytes\n"
-           "TMD size:        {} bytes\n"
-           "Data size:        {} bytes\n"
-           "Footer size:        {} bytes\n").format(*header))
+    print(("\nHeader size:\t\t{} bytes\n"
+           "WAD type:\t\t0x{}\n"
+           "Cert chain size:\t{} bytes\n"
+           "Reserved:\t\t0x{}\n"
+           "Ticket size:\t\t{} bytes\n"
+           "TMD size:\t\t{} bytes\n"
+           "Data size:\t\t{} bytes\n"
+           "Footer size:\t\t{} bytes\n").format(*header))
 
 # Find the offsets of the start and end points of the 5 main WAD segments
 
