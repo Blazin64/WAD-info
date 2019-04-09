@@ -32,11 +32,14 @@ def read_header(file):
     file.seek(0)
     raw_header = encode(file.read(32), 'hex')
     header = []
+
     for i in range(0, len(raw_header), 8):
         if i in [0, 16, 32, 40, 48, 56]:
             header.append(dec_u32(raw_header[i:i+8]))
+
         else:
             header.append(decode(raw_header[i:i+8], 'ascii'))
+
     return header
 
 
@@ -87,11 +90,14 @@ def find_offsets(header_size, cert_size, tik_size,
 def csv_dump(offsets, file, filename):
     file.seek(offsets[2][0] + 396)
     title_id = encode(file.read(8), 'hex').decode('ascii')
+
     file.seek(offsets[1][0] + 447)
     titlekey_enc = encode(file.read(16), 'hex').decode('ascii')
+
     file.seek(offsets[2][0] + 476)
     title_ver = str(dec_u16(encode(file.read(2), 'hex')
                             .decode('ascii'))).zfill(4)
+
     print("{},{},{},\"{}\"".format(title_id, title_ver,
                                    titlekey_enc, filename))
 
@@ -99,11 +105,14 @@ def csv_dump(offsets, file, filename):
 def print_info(show_csv, show_header, file, filename):
     if encode(file.read(6), 'hex') != b'000000204973':
         print("Error: invalid WAD file")
+
     else:
         header = read_header(file)
+
         if show_header:
             print(filename)
             print_header(header)
+
         if show_csv:
             offsets = find_offsets(header[0], header[2], *header[4:])
             csv_dump(offsets, file, filename)
@@ -118,6 +127,7 @@ def batch_mode(show_csv, show_header, path):
 def main(show_csv, show_header, batch, filename, path):
     if batch:
         batch_mode(show_csv, show_header, path)
+
     else:
         file = open(filename, "rb")
         print_info(show_csv, show_header, file, filename)
@@ -135,10 +145,13 @@ if __name__ == "__main__":
 
     if not (arguments.i or arguments.batch):
         parser.error("Either -i <filename> or --batch must be used.\n")
+
     if arguments.i and not (arguments.csv or arguments.header):
         parser.error("-i <filename> requires --csv and/or --header\n")
+
     if arguments.path and not arguments.batch:
         parser.error("--path can only be used with --batch\n")
+
     if arguments.i and arguments.batch:
         parser.error("-i <filename> cannot be used with --batch")
 
