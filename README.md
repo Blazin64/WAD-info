@@ -3,6 +3,8 @@ This tool allows you to view various information about WAD files that are used o
 
 Compatible with both Python 2 and 3.
 
+Note: Please use the [GitLab repository](https://gitlab.com/Blazin64/WAD-info). The [GitHub repository](https://github.com/Blazin64/WAD-info) is only a mirror.
+
 ### Usage
 Run `python wad-info.py -i <your WAD file here> --header` to view information in the header of a single WAD.
 
